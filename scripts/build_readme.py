@@ -124,8 +124,8 @@ on labelled data and manual algorithm design.
 
 | Area | Topics |
 | :--- | :--- |
-| **Time series** | Self-supervised representation learning, anomaly detection, and forecasting |
-| **AutoML** | Meta-learning, neural architecture and hyperparameter selection |
+| **Time series** | Self-supervised representation learning, classification, and forecasting |
+| **AutoML** | Meta-learning, neural architecture search (NAS), and hyperparameter optimization (HPO) |
 | **Uncertainty quantification** | Conformal prediction |
 
 ---
