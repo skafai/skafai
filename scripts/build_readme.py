@@ -111,7 +111,7 @@ def picture(dark: str, light: str, alt: str, extra: str = "") -> str:
             f'    <img alt="{alt}" src="{light}" {extra}/>\n  </picture>')
 
 
-HEADER_ALT = "Wadie Skaf: AI Research Scientist, Developer, Passionate Technologist"
+HEADER_ALT = "Wadie Skaf: AI Research Scientist, Developer, and Passionate Technologist"
 
 BODY = """
 I am an AI Research Scientist and PhD candidate in Computer Science at
@@ -126,9 +126,9 @@ on labelled data and manual algorithm design.
 
 | Area | Topics |
 | :--- | :--- |
-| **Time series** | Self-supervised representation learning, anomaly detection, forecasting |
+| **Time series** | Self-supervised representation learning, anomaly detection, and forecasting |
 | **AutoML** | Meta-learning, neural architecture and hyperparameter selection |
-| **Uncertainty quantification** | Conformal prediction, calibrated prediction intervals for forecasting |
+| **Uncertainty quantification** | Conformal prediction for classification |
 
 ---
 
@@ -184,9 +184,9 @@ on labelled data and manual algorithm design.
 
 | Degree | Institution | Notes |
 | :--- | :--- | :--- |
-| Dr. rer. nat. (PhD), Computer Science (AI) <picture><source media="(prefers-color-scheme: dark)" srcset="assets/ongoing-dark.svg" /><img alt="ongoing" src="assets/ongoing-light.svg" align="absmiddle" /></picture> | RWTH Aachen University | AutoML, uncertainty quantification, time series, representation learning |
-| M.Sc., Computer Science (AI) | Eötvös Loránd University | Machine learning, deep learning, anomaly detection, audio signals |
-| B.Sc., Informatics (Software Engineering) | Latakia University | Software engineering, information systems, databases, mobile apps |
+| Dr. rer. nat. (PhD), Computer Science (AI) <picture><source media="(prefers-color-scheme: dark)" srcset="assets/ongoing-dark.svg" /><img alt="ongoing" src="assets/ongoing-light.svg" align="absmiddle" /></picture> | RWTH Aachen University | AutoML, uncertainty quantification, time series, and representation learning |
+| M.Sc., Computer Science (AI) | Eötvös Loránd University | Machine learning, deep learning, anomaly detection, and audio signals |
+| B.Sc., Informatics (Software Engineering) | Latakia University | Software engineering, information systems, databases, and mobile apps |
 
 ---
 
