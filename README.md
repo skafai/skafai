@@ -51,7 +51,7 @@ on labelled data and manual algorithm design.
 
 | Project | What It Is |
 | :--- | :--- |
-| [**Relflow**](https://github.com/relflow/relflow) | Open-source model factory that builds and adapts foundation models for typed, nested structured data |
+| [**relflow**](https://github.com/relflow/relflow) | Open-source model factory that builds and adapts foundation models for typed, nested structured data |
 
 ---
 
