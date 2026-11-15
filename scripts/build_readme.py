@@ -157,13 +157,6 @@ on labelled data and manual algorithm design.
 | [**Relflow**](https://github.com/relflow/relflow) | Open-source model factory that builds and adapts foundation models for typed, nested structured data |
 | [**RATS**](https://github.com/HyperVectors/RATS) | High-performance time series augmentation library in Rust, with a Python wrapper (RATSpy) |
 
---- | :--- | :--- |
-| [**Chronocratic**](https://github.com/chronocratic) | Founder | Open-source infrastructure, datasets, and models for time series research |
-| [**rewrite.rs**](https://rewrite.rs/) | Founder | Guide and AI skills for rewriting software in Rust |
-| [**Relflow**](https://github.com/relflow/relflow) | Contributor | Open-source model factory that builds and adapts foundation models for typed, nested structured data |
-| [**RATS**](https://github.com/HyperVectors/RATS) | Contributor | High-performance time series augmentation library in Rust, with a Python wrapper (RATSpy) |
-| [**PCGA**](https://github.com/skafai/PCGA) | Author | Genetic algorithm for controlling label proportions across containers |
-
 ---
 
 ## Main Publications
