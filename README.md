@@ -41,6 +41,9 @@ on labelled data and manual algorithm design.
 | Project | Role | What It Is |
 | :--- | :--- | :--- |
 | [**Chronocratic**](https://github.com/chronocratic) | Founder | Open-source infrastructure, datasets, and models for time series research |
+| &nbsp;&nbsp;↳ [tslab](https://github.com/chronocratic/tslab) | | Batteries-included lab for time series research |
+| &nbsp;&nbsp;↳ [datasets](https://github.com/chronocratic/chronocratic-datasets) | | Ready-to-use time series datasets and DataModules for PyTorch Lightning |
+| &nbsp;&nbsp;↳ [models](https://github.com/chronocratic/chronocratic-models) | | Ready-to-use time series models in PyTorch and Lightning |
 | [**rewrite.rs**](https://rewrite.rs/) | Founder | Guide and AI skills for rewriting software in Rust |
 | [**RATS**](https://github.com/HyperVectors/RATS) | Contributor | High-performance time series augmentation library in Rust, with a Python wrapper (RATSpy) |
 | [**PCGA**](https://github.com/skafai/PCGA) | Author | Genetic algorithm for controlling label proportions across containers |

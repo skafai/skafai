@@ -27,6 +27,7 @@ HEADER = {
     "overlay": 0,
     "border": "false",
 }
+HEADER_ALT = "Wadie Skaf: AI Research Scientist, Developer, and Passionate Technologist"
 HEADER_MODES = {
     "dark": {"bg": "000000", "titleColor": "ffffff", "subtitleColor": "6cb8e6"},
     "light": {"bg": "f7f7f5", "titleColor": "0a0a0a", "subtitleColor": "1f6f9f"},
@@ -69,7 +70,6 @@ SKILL_ROWS = [
         ("Tailwind CSS", "tailwindcss"),
     ]),
 ]
-SPOKEN = "English (full) · German (professional, B2–C1) · Hungarian (elementary)"
 
 
 def header_url(mode: str, image: str | None) -> str:
@@ -111,8 +111,6 @@ def picture(dark: str, light: str, alt: str, extra: str = "") -> str:
             f'    <img alt="{alt}" src="{light}" {extra}/>\n  </picture>')
 
 
-HEADER_ALT = "Wadie Skaf: AI Research Scientist, Developer, and Passionate Technologist"
-
 BODY = """
 I am an AI Research Scientist and PhD candidate in Computer Science at
 RWTH Aachen University. I research uncertainty
@@ -145,6 +143,9 @@ on labelled data and manual algorithm design.
 | Project | Role | What It Is |
 | :--- | :--- | :--- |
 | [**Chronocratic**](https://github.com/chronocratic) | Founder | Open-source infrastructure, datasets, and models for time series research |
+| &nbsp;&nbsp;↳ [tslab](https://github.com/chronocratic/tslab) | | Batteries-included lab for time series research |
+| &nbsp;&nbsp;↳ [datasets](https://github.com/chronocratic/chronocratic-datasets) | | Ready-to-use time series datasets and DataModules for PyTorch Lightning |
+| &nbsp;&nbsp;↳ [models](https://github.com/chronocratic/chronocratic-models) | | Ready-to-use time series models in PyTorch and Lightning |
 | [**rewrite.rs**](https://rewrite.rs/) | Founder | Guide and AI skills for rewriting software in Rust |
 | [**RATS**](https://github.com/HyperVectors/RATS) | Contributor | High-performance time series augmentation library in Rust, with a Python wrapper (RATSpy) |
 | [**PCGA**](https://github.com/skafai/PCGA) | Author | Genetic algorithm for controlling label proportions across containers |
@@ -201,7 +202,7 @@ Reach out on LinkedIn or by email.
 ## Links
 
 <p>
-{links}
+  {links}
 </p>
 """
 
@@ -216,7 +217,7 @@ def build_readme() -> str:
         for name, items in SKILL_ROWS)
     return (f'<p align="center">\n  {header}\n</p>\n'
             + expand_pubs(BODY).replace("{skill_rows}", skill_rows)
-            .replace("{links}", "  " + links))
+            .replace("{links}", links))
 
 
 def preview_pane(readme: str, mode: str) -> str:
