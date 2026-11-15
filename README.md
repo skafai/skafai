@@ -19,7 +19,7 @@ on labelled data and manual algorithm design.
 | :--- | :--- |
 | **Time series** | Self-supervised representation learning, anomaly detection, and forecasting |
 | **AutoML** | Meta-learning, neural architecture and hyperparameter selection |
-| **Uncertainty quantification** | Conformal prediction for classification |
+| **Uncertainty quantification** | Conformal prediction |
 
 ---
 
