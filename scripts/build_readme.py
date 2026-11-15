@@ -112,11 +112,11 @@ def picture(dark: str, light: str, alt: str, extra: str = "") -> str:
 
 
 BODY = """
-I am an AI Research Scientist and PhD candidate in Computer Science at
-RWTH Aachen University. I research uncertainty
-quantification, conformal prediction, and self-supervised representation learning
-for time series, building trustworthy, uncertainty-aware models that depend less
-on labelled data and manual algorithm design.
+I am an AI Research Scientist and PhD candidate in Computer Science at RWTH Aachen
+University, researching automated machine learning (AutoML), uncertainty
+quantification, and self-supervised representation learning for time series. My work
+focuses on developing explainable, trustworthy, and uncertainty-aware models that are
+less dependent on labelled data and manual algorithm design.
 
 ---
 
