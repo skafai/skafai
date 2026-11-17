@@ -11,6 +11,10 @@ quantification, and self-supervised representation learning for time series. My 
 focuses on developing explainable, trustworthy, and uncertainty-aware models that are
 less dependent on labelled data and manual algorithm design.
 
+I am interested in building open-source packages that improve AI research, as well as
+Rust-based tools that make AI more efficient. I also actively contribute to open-source
+projects.
+
 ---
 
 ## Research Focus
