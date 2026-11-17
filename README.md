@@ -91,6 +91,7 @@ limited to:
 - Time series analysis and forecasting
 - Uncertainty quantification
 - MLOps and AI systems engineering
+- Making AI efficient with Rust (fast inference, data pipelines, and tooling)
 - Software and web development
 
 Reach out on LinkedIn or by email.
