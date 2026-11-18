@@ -34,6 +34,20 @@ def fetch(url: str) -> bytes:
         return response.read()
 
 
+def solid_icon(svg: bytes, icon: str) -> bytes:
+    """Swap the badge's placeholder logo for a solid Iconify glyph (the set skaf.ai uses),
+    keeping the badge's own light/dark colour. shieldcn's own glyphs are either missing
+    (Matplotlib, Seaborn) or hairline-thin (Airflow). The glyph is scaled to the 12px slot."""
+    source = fetch(f"https://api.iconify.design/{icon}.svg").decode()
+    glyph = re.search(r' d="([^"]+)"', source)[1]
+    size = max(float(v) for v in re.search(r'viewBox="[\d.]+ [\d.]+ ([\d.]+) ([\d.]+)"', source).groups())
+    scale = round(12 / size, 6)
+    return re.sub(
+        r'(<path fill="#[0-9a-f]+") fill-opacity="[^"]*" d="[^"]+" transform="[^"]+"',
+        lambda m: f'{m[1]} d="{glyph}" transform="matrix({scale} 0 0 {scale} 9 6)"',
+        svg.decode(), count=1).encode()
+
+
 def main() -> None:
     readme = ROOT / "README.md"
     text = readme.read_text()
@@ -43,7 +57,9 @@ def main() -> None:
     mapping = {}
     for url in sorted(set(URL.findall(text))):
         target = OUT / file_name(url)
-        target.write_bytes(fetch(url.replace("&amp;", "&")))
+        clean, _, fragment = url.replace("&amp;", "&").partition("#iconify=")
+        data = fetch(clean)
+        target.write_bytes(solid_icon(data, fragment) if fragment else data)
         mapping[url] = target.relative_to(ROOT).as_posix()
     for url, local in mapping.items():
         text = text.replace(url, local)

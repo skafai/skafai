@@ -22,8 +22,8 @@ HEADER = {
     "subtitle": "AI Research Scientist · Developer · Passionate Technologist",
     "align": "center",
     "font": "serif",
-    "width": 1280,
-    "height": 400,
+    "width": 840,
+    "height": 340,
     "overlay": 0,
     "border": "false",
 }
@@ -58,18 +58,29 @@ SKILL_ROWS = [
         ("Keras", "keras"), ("scikit-learn", "scikitlearn"),
     ]),
     ("Data", [
-        ("Pandas", "pandas"), ("NumPy", "numpy"), ("Apache Spark", "apachespark"),
-        ("Apache Airflow", "apacheairflow"),
+        ("Pandas", "pandas"), ("NumPy", "numpy"),
+        ("Matplotlib", "iconify:fa-solid/chart-bar"),
+        ("Seaborn", "iconify:fa-solid/chart-line"), ("Apache Spark", "apachespark"),
     ]),
     ("MLOps & infra", [
         ("MLflow", "mlflow"), ("Docker", "docker"), ("Linux", "linux"), ("Slurm", "lu:Server"),
         ("AWS", "lu:Cloud"), ("Git", "git"),
+        ("Apache Airflow", "iconify:devicon-plain/apacheairflow"),
     ]),
     ("Web", [
         ("React", "react"), ("Next.js", "nextdotjs"), ("Django", "django"),
         ("Tailwind CSS", "tailwindcss"),
     ]),
 ]
+
+
+# Transparent inline image that makes the first badge line a few px taller (a small gap
+# under the group name; GitHub strips CSS, so a spacer image is the only way).
+SPACER = '<img src="assets/spacer.svg" width="1" height="34" alt="" />'
+
+
+# Font Awesome arrow-right (fa6-solid), muted grey so it reads on light and dark.
+ARROW = '<img src="assets/arrow.svg" height="14" alt="→" align="absmiddle" />'
 
 
 def header_url(mode: str, image: str | None) -> str:
@@ -90,9 +101,17 @@ def link_badge(label: str, logo: str, href: str, alt: str) -> str:
 
 
 def tool_badge(label: str, logo: str) -> str:
+    # "iconify:<set>/<name>" = shieldcn lacks (or only has a hairline) icon: ask for a
+    # placeholder logo so the badge reserves the slot, and let vendor_images.py swap in the
+    # solid Iconify glyph (tagged on the URL as #iconify=<set>/<name>).
+    icon = logo.removeprefix("iconify:") if logo.startswith("iconify:") else ""
+    if icon:
+        logo = "numpy"
+
     def url(mode: str) -> str:
-        return f"{SC}/badge/{label_path(label)}.svg?" + urlencode(
+        return (f"{SC}/badge/{label_path(label)}.svg?" + urlencode(
             {"logo": logo, "variant": "outline", "size": "xs", "font": "inter", "mode": mode})
+            + (f"#iconify={icon}" if icon else ""))
     return (f'<picture><source media="(prefers-color-scheme: dark)" srcset="{url("dark")}" />'
             f'<img alt="{label}" src="{url("light")}" /></picture>')
 
@@ -100,6 +119,18 @@ def tool_badge(label: str, logo: str) -> str:
 def pub_links(doi: str, code: str | None = None) -> str:
     links = [("Paper", "lu:FileText", doi)] + ([("Code", "github", code)] if code else [])
     return " ".join(f'<a href="{href}">{tool_badge(label, logo)}</a>' for label, logo, href in links)
+
+
+def project_links(spec: str) -> str:
+    """spec like "website=URL|github=URL"; icons match the project cards on skaf.ai."""
+    pills = {"website": ("Website", "iconify:fa-solid/globe"),
+             "github": ("GitHub", "iconify:fa-brands/github")}
+    links = (item.split("=", 1) for item in spec.split("|"))
+    return " ".join(f'<a href="{href}">{tool_badge(*pills[kind])}</a>' for kind, href in links)
+
+
+def expand_projects(text: str) -> str:
+    return re.sub(r"\{links:([^}]+)\}", lambda m: project_links(m[1]), text)
 
 
 def expand_pubs(text: str) -> str:
@@ -128,63 +159,93 @@ projects.
 
 | Area | Topics |
 | :--- | :--- |
-| **Time series** | Self-supervised representation learning, classification, and forecasting |
+| **Time Series** | Self-supervised representation learning, classification, and forecasting |
 | **AutoML** | Meta-learning, neural architecture search (NAS), and hyperparameter optimization (HPO) |
-| **Uncertainty quantification** | Conformal prediction |
+| **Uncertainty Quantification** | Conformal prediction |
 
 ---
 
 ## Technical Skills
 
-| Category | Skills |
-| :--- | :--- |
 {skill_rows}
 
 ---
 
 ## Projects
 
-| Project | Role | What It Is |
-| :--- | :--- | :--- |
-| [**Chronocratic**](https://github.com/chronocratic) | Founder | Open-source infrastructure, datasets, and models for time series research |
-| &nbsp;&nbsp;↳ [tslab](https://github.com/chronocratic/tslab) | | Batteries-included lab for time series research |
-| &nbsp;&nbsp;↳ [datasets](https://github.com/chronocratic/chronocratic-datasets) | | Ready-to-use time series datasets and DataModules for PyTorch Lightning |
-| &nbsp;&nbsp;↳ [models](https://github.com/chronocratic/chronocratic-models) | | Ready-to-use time series models in PyTorch and Lightning |
-| [**rewrite.rs**](https://rewrite.rs/) | Founder | Guide and AI skills for rewriting software in Rust |
-| [**RATS**](https://github.com/HyperVectors/RATS) | Contributor | High-performance time series augmentation library in Rust, with a Python wrapper (RATSpy) |
-| [**PCGA**](https://github.com/skafai/PCGA) | Author | Genetic algorithm for controlling label proportions across containers |
+**Chronocratic**<br />
+Open-source infrastructure, datasets, and models for time series research<br />
+{links:github=https://github.com/chronocratic}
+
+{arrow} **tslab**<br />
+Batteries-included lab for time series research<br />
+{links:github=https://github.com/chronocratic/tslab}
+
+{arrow} **datasets**<br />
+Ready-to-use time series datasets and DataModules for PyTorch Lightning<br />
+{links:github=https://github.com/chronocratic/chronocratic-datasets}
+
+{arrow} **models**<br />
+Ready-to-use time series models in PyTorch and Lightning<br />
+{links:github=https://github.com/chronocratic/chronocratic-models}
+
+<hr />
+
+**rewrite.rs**<br />
+Guide and AI skills for rewriting software in Rust<br />
+{links:website=https://rewrite.rs/|github=https://github.com/rewrite-rs}
+
+<hr />
+
+**RATS**<br />
+High-performance time series augmentation library in Rust, with a Python wrapper (RATSpy)<br />
+{links:github=https://github.com/HyperVectors/RATS}
+
+<hr />
+
+**PCGA**<br />
+Genetic algorithm for controlling label proportions across containers<br />
+{links:github=https://github.com/skafai/PCGA}
 
 ---
 
 ## Open Source Contributions
 
-| Project | What It Is |
-| :--- | :--- |
-| [**relflow**](https://github.com/relflow/relflow) | Open-source model factory that builds and adapts foundation models for typed, nested structured data |
+**relflow**<br />
+Open-source model factory that builds and adapts foundation models for typed, nested structured data<br />
+{links:github=https://github.com/relflow/relflow}
 
 ---
 
 ## Main Publications
 
-- **Skaf, W.**, Baratchi, M., & Hoos, H. (2025). Time Series Representations Classroom (TSRC):
-  A teacher-student-based framework for interpretability-enhanced unsupervised time series
-  representation learning. *Machine Learning*.<br />{pub:https://doi.org/10.1007/s10994-025-06895-x|https://github.com/ADA-research/TSRC}
-- Moeini, E., Vox, C., Anastacio, M., **Skaf, W.**, Baratchi, M., & Hoos, H. H. (2026). Neural
-  architecture and hyperparameter selection through meta-learning on time series. In
-  *Proceedings of the AAAI Conference on Artificial Intelligence (AAAI)*.<br />{pub:https://doi.org/10.1609/aaai.v40i29.39622}
-- **Skaf, W.**, & Horváth, T. (2022). Denoising architecture for unsupervised anomaly detection
-  in time-series. In *Proceedings of the European Conference on Advances in Databases and
-  Information Systems (ADBIS)*.<br />{pub:https://doi.org/10.1007/978-3-031-15743-1_17|https://github.com/skafai/denoising_architecture_time_series_paper}
+**Skaf, W.**, Baratchi, M., & Hoos, H. (2025). Time Series Representations Classroom (TSRC):
+A teacher-student-based framework for interpretability-enhanced unsupervised time series
+representation learning. *Machine Learning*.<br />{pub:https://doi.org/10.1007/s10994-025-06895-x|https://github.com/ADA-research/TSRC}
+
+Moeini, E., Vox, C., Anastacio, M., **Skaf, W.**, Baratchi, M., & Hoos, H. H. (2026). Neural
+architecture and hyperparameter selection through meta-learning on time series. In
+*Proceedings of the AAAI Conference on Artificial Intelligence (AAAI)*.<br />{pub:https://doi.org/10.1609/aaai.v40i29.39622}
+
+**Skaf, W.**, & Horváth, T. (2022). Denoising architecture for unsupervised anomaly detection
+in time-series. In *Proceedings of the European Conference on Advances in Databases and
+Information Systems (ADBIS)*.<br />{pub:https://doi.org/10.1007/978-3-031-15743-1_17|https://github.com/skafai/denoising_architecture_time_series_paper}
 
 ---
 
 ## Education
 
-| Degree | Institution | Notes |
-| :--- | :--- | :--- |
-| Dr. rer. nat. (PhD), Computer Science (AI) <picture><source media="(prefers-color-scheme: dark)" srcset="assets/ongoing-dark.svg" /><img alt="ongoing" src="assets/ongoing-light.svg" align="absmiddle" /></picture> | RWTH Aachen University | AutoML, uncertainty quantification, time series, and representation learning |
-| M.Sc., Computer Science (AI) | Eötvös Loránd University | Machine learning, deep learning, anomaly detection, and audio signals |
-| B.Sc., Informatics (Software Engineering) | Latakia University | Software engineering, information systems, databases, and mobile apps |
+**Dr. rer. nat. (PhD), Computer Science (AI)** <picture><source media="(prefers-color-scheme: dark)" srcset="assets/ongoing-dark.svg" /><img alt="ongoing" src="assets/ongoing-light.svg" align="absmiddle" /></picture><br />
+RWTH Aachen University<br />
+<sub>AutoML, uncertainty quantification, time series, and representation learning</sub>
+
+**M.Sc., Computer Science (AI)**<br />
+Eötvös Loránd University<br />
+<sub>Machine learning, deep learning, anomaly detection, and audio signals</sub>
+
+**B.Sc., Informatics (Software Engineering)**<br />
+Latakia University<br />
+<sub>Software engineering, information systems, databases, and mobile apps</sub>
 
 ---
 
@@ -216,11 +277,12 @@ def build_readme() -> str:
                      header_url("light", f"{RAW}/header-bg-light.png"), HEADER_ALT,
                      'width="100%" ')
     links = "\n  ".join(link_badge(*l) for l in LINKS)
-    skill_rows = "\n".join(
-        f"| **{name}** | " + " ".join(tool_badge(*t) for t in items) + " |"
+    skill_rows = "\n\n".join(
+        f"**{name}**<br />\n" + SPACER + " ".join(tool_badge(*t) for t in items)
         for name, items in SKILL_ROWS)
     return (f'<p align="center">\n  {header}\n</p>\n'
-            + expand_pubs(BODY).replace("{skill_rows}", skill_rows)
+            + expand_projects(expand_pubs(BODY)).replace("{skill_rows}", skill_rows)
+            .replace("{arrow}", ARROW)
             .replace("{links}", links))
 
 
